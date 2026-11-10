@@ -1,0 +1,122 @@
+// CyberAce Tech Security Ltd — SOC Security Alert and Incident Management System
+// Paste into https://dbdiagram.io to render the ER diagram
+
+Table client {
+  client_id integer [pk, increment]
+  name varchar(150) [not null, unique]
+  industry varchar(50) [not null, note: 'Banking, Fintech, Healthcare, E-commerce...']
+  region varchar(20) [not null, note: 'Africa / Europe / Middle East — used for sharding in Portfolio 5']
+  country varchar(60) [not null]
+  sla_tier varchar(10) [not null, note: 'Gold / Silver / Bronze']
+  contact_email varchar(150) [not null]
+  onboarded_date date [not null]
+}
+
+Table asset {
+  asset_id integer [pk, increment]
+  client_id integer [not null, ref: > client.client_id]
+  hostname varchar(100) [not null]
+  ip_address inet [not null]
+  asset_type varchar(30) [not null, note: 'Server, Workstation, Firewall, Cloud VM...']
+  operating_system varchar(50)
+  criticality varchar(10) [not null, note: 'Low / Medium / High / Critical']
+
+  indexes {
+    (client_id, hostname) [unique]
+  }
+}
+
+Table analyst {
+  analyst_id integer [pk, increment]
+  full_name varchar(100) [not null]
+  email varchar(150) [not null, unique]
+  tier varchar(5) [not null, note: 'L1 / L2 / L3']
+  shift varchar(10) [not null, note: 'Day / Night']
+}
+
+Table detection_rule {
+  rule_id integer [pk, increment]
+  rule_name varchar(150) [not null, unique]
+  mitre_technique varchar(20) [note: 'e.g. T1110 Brute Force']
+  default_severity varchar(10) [not null]
+  log_source varchar(30) [not null, note: 'Firewall, IDS, Endpoint, Auth...']
+}
+
+Table security_event {
+  event_id bigint [pk, increment]
+  asset_id integer [not null, ref: > asset.asset_id]
+  event_time timestamp [not null]
+  event_type varchar(50) [not null, note: 'login_failed, port_scan, malware_detected...']
+  source_ip inet
+  destination_ip inet
+  destination_port integer
+  username varchar(100)
+  raw_message text
+}
+
+Table alert {
+  alert_id integer [pk, increment]
+  rule_id integer [not null, ref: > detection_rule.rule_id]
+  asset_id integer [not null, ref: > asset.asset_id]
+  incident_id integer [null, ref: > incident.incident_id, note: 'NULL until linked to an incident']
+  triggered_at timestamp [not null]
+  severity varchar(10) [not null]
+  status varchar(20) [not null, note: 'Open / Investigating / False Positive / Escalated']
+}
+
+Table alert_event {
+  alert_id integer [ref: > alert.alert_id]
+  event_id bigint [ref: > security_event.event_id]
+
+  indexes {
+    (alert_id, event_id) [pk]
+  }
+}
+
+Table incident {
+  incident_id integer [pk, increment]
+  client_id integer [not null, ref: > client.client_id]
+  assigned_analyst_id integer [null, ref: > analyst.analyst_id]
+  title varchar(200) [not null]
+  severity varchar(10) [not null]
+  status varchar(20) [not null, note: 'New / In Progress / Contained / Closed']
+  opened_at timestamp [not null]
+  closed_at timestamp [null]
+}
+
+Table vulnerability {
+  cve_id varchar(20) [pk, note: 'e.g. CVE-2024-3400']
+  title varchar(200) [not null]
+  cvss_score numeric(3,1) [not null, note: '0.0 - 10.0']
+  published_date date
+}
+
+Table asset_vulnerability {
+  asset_id integer [ref: > asset.asset_id]
+  cve_id varchar(20) [ref: > vulnerability.cve_id]
+  detected_at timestamp [not null]
+  patch_status varchar(15) [not null, note: 'Unpatched / Patched / Accepted Risk']
+
+  indexes {
+    (asset_id, cve_id) [pk]
+  }
+}
+
+Table remediation_task {
+  task_id integer [pk, increment]
+  incident_id integer [not null, ref: > incident.incident_id]
+  analyst_id integer [not null, ref: > analyst.analyst_id]
+  description text [not null]
+  due_date date [not null]
+  status varchar(15) [not null, note: 'Pending / Done']
+  completed_at timestamp [null]
+}
+
+Table audit_log {
+  log_id bigint [pk, increment]
+  analyst_id integer [not null, ref: > analyst.analyst_id]
+  action varchar(50) [not null, note: 'CLAIM_INCIDENT, CLOSE_ALERT, ESCALATE...']
+  entity_type varchar(30) [not null]
+  entity_id bigint [not null]
+  logged_at timestamp [not null]
+}
