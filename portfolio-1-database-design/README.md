@@ -224,11 +224,14 @@ All scripts are **re-runnable**: `schema.sql` drops and recreates tables, the im
 
 | Screenshot | Shows |
 |---|---|
-| `screenshots/01-database-created.png` | `cyberace_soc` database created in pgAdmin |
-| `screenshots/02-schema-created.png` | All 16 tables created |
-| `screenshots/03-real-data-imported.png` | PSQL Tool output: real KEV and MITRE row counts, T1078 → 4 tactics, multi-CWE split |
-| `screenshots/04-sample-data-loaded.png` | Row counts for all real and simulated tables |
-| `screenshots/05-constraint-tests-passed.png` | All 19 constraint tests passing |
+| `screenshots/01-database-created.png` | Creating the `cyberace_soc` database in pgAdmin |
+| `screenshots/02-schema-created.png` | All 16 tables created by `schema.sql` (version 2) |
+| `screenshots/03a-real-data-imported.png` | PSQL Tool: moving into the repository folder with `\cd` |
+| `screenshots/03b-real-data-imported.png` | PSQL Tool: `dir` confirming the `data` and `portfolio-1-database-design` folders |
+| `screenshots/03c-real-data-imported.png` | PSQL Tool: ETL import — 1,779 KEV rows, 706 techniques, 881 links, 1,735 CWE rows loaded and committed |
+| `screenshots/04-sample-data-loaded.png` | Row counts for all 16 tables (R = real, S = simulated) |
+| `screenshots/05a-constraint-tests-passed.png` | Constraint tests 1–16 passing |
+| `screenshots/05b-constraint-tests-passed.png` | Constraint tests 17–19 passing |
 
 **Constraint tests ([`constraint_tests.sql`](constraint_tests.sql)):** each test deliberately tries to break one rule inside a `DO` block and reports `PASSED` if the database rejects it. Tests cover `CHECK`, `NOT NULL`, `UNIQUE`, composite keys, foreign keys, `ON DELETE RESTRICT`, `CASCADE` and `SET NULL`, data types (`INET`), and the official ID formats of the real MITRE and CISA data. Test 13 deletes an incident and then rolls the delete back, so no data is lost.
 
