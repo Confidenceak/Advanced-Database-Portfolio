@@ -10,17 +10,17 @@ The portfolio builds the database behind its 24/7 Security Operations Centre (SO
 incidents, vulnerabilities and remediation tasks for clients across Africa, Europe and the Middle East.
 
 The operational data (clients, assets, incidents) is simulated. The threat-intelligence reference data is **real**:
-the CISA Known Exploited Vulnerabilities catalog, MITRE ATT&CK Enterprise and, from Portfolio 2, real server logs
-from the Loghub dataset. See [`data/README.md`](data/README.md).
+the CISA Known Exploited Vulnerabilities catalog and MITRE ATT&CK Enterprise, plus CVSS scores from NIST NVD.
+See [`data/README.md`](data/README.md).
 
 ## Portfolio Contents
 | # | Activity | Folder | Status |
 |---|---|---|---|
 | 1 | Database Design and Modelling | [portfolio-1-database-design](portfolio-1-database-design/) | Complete |
-| 2 | Query Processing and Optimisation | portfolio-2-query-optimisation | Not started |
-| 3 | Transactions and Concurrency | portfolio-3-transactions-concurrency | Not started |
-| 4 | NoSQL and Advanced Data Models | portfolio-4-nosql | Not started |
-| 5 | Distributed and Cloud Database | portfolio-5-distributed-cloud | Not started |
+| 2 | Query Processing and Optimisation | [portfolio-2-query-optimisation](portfolio-2-query-optimisation/) | Complete |
+| 3 | Transactions and Concurrency | [portfolio-3-transactions-concurrency](portfolio-3-transactions-concurrency/) | Complete |
+| 4 | NoSQL and Advanced Data Models | [portfolio-4-nosql](portfolio-4-nosql/) | Complete |
+| 5 | Distributed and Cloud Database | [portfolio-5-distributed-cloud](portfolio-5-distributed-cloud/) | Complete |
 
 ## Repository Structure
 ```
@@ -39,11 +39,17 @@ Advanced-Database-Portfolio/
     ├── sample_data.sql
     ├── constraint_tests.sql
     └── screenshots/
+portfolio-2-query-optimisation/      ← p2_query_optimisation.sql
+portfolio-3-transactions-concurrency/← p3_transactions.sql
+portfolio-4-nosql/                   ← p4_document_model.sql, mongodb_equivalent.js
+portfolio-5-distributed-cloud/       ← p5_distributed_partitioning.sql
 ```
+
+**Run order:** Portfolio 1 (`schema.sql` → `import_real_data.sql` → `sample_data.sql` → `constraint_tests.sql`), then `p2` → `p3` → `p4` → `p5`. Every script is re-runnable.
 
 ## Tools
 PostgreSQL, pgAdmin 4, dbdiagram.io, Python, GitHub
-*(later portfolios: MongoDB, Redis, Neo4j, Docker)*
+*(Portfolio 4 uses PostgreSQL JSONB as the document store, with equivalent MongoDB commands provided)*
 
 ## AI Use Declaration
 *[To complete in your own words — tool used, what it was used for, and how you reviewed, tested and verified the output.]*
