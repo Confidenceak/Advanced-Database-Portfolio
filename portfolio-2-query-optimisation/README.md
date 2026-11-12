@@ -16,12 +16,14 @@
 | Q2 | Everything one suspicious IP did in the last 7 days (threat hunting) | `idx_event_srcip_time (source_ip, event_time)` | Very selective: one IP out of 500,000 rows |
 | Q3 | Top 10 IPs by failed logins (brute-force detection) | `idx_event_failed_login (source_ip) WHERE event_type = 'login_failed'` | **Partial** index: only ~10% of rows, so it is small and cheap to maintain |
 
-## Results (test run — your own timings will differ slightly)
+## Results (my run, PostgreSQL 18)
 | Query | Plan before | Plan after | Before (ms) | After (ms) | Speed-up |
 |---|---|---|---|---|---|
-| Q1 | Parallel Seq Scan | Bitmap Heap Scan | 29.2 | 1.2 | ~25× |
-| Q2 | Parallel Seq Scan | Index Scan | 33.9 | 0.01 | >1,000× |
-| Q3 | Seq Scan | Bitmap Heap Scan | 50.9 | 25.8 | ~2× |
+| Q1 | Parallel Seq Scan | Bitmap Heap Scan (idx_event_asset_time) | 146.278 | 1.947 | 75.1× |
+| Q2 | Parallel Seq Scan | Index Scan (idx_event_srcip_time) | 143.341 | 0.013 | 11,026× |
+| Q3 | Seq Scan | Bitmap Heap Scan (idx_event_failed_login) | 117.533 | 52.181 | 2.3× |
+
+Before indexing, the plans show **166,365** (Q1) and **166,689** (Q2) rows *removed by filter* per worker: almost every row was read and thrown away.
 
 ## Analysis
 - **Without indexes** PostgreSQL must read every one of the ~500,000 rows (*sequential scan*), even when only a handful match. It uses parallel workers to share the work, but the total work is unchanged.
@@ -42,5 +44,7 @@ Query them with e.g. `SELECT * FROM v_client_exposure;`
 ## Evidence
 | Screenshot | Shows |
 |---|---|
-| [p2-01-before-after.png](screenshots/p2-01-before-after.png) | Data Output: before/after comparison table |
-| [p2-02-plans.png](screenshots/p2-02-plans.png) | Messages: EXPLAIN ANALYZE plans showing Seq Scan → Index Scan |
+| [p2a-01-before-after.png](screenshots/p2a-01-before-after.png) | Data Output: before/after comparison table |
+| [p2b-01-before-after.png](screenshots/p2b-01-before-after.png) | Messages: Q1 and Q2 plans BEFORE indexing (Parallel Seq Scan) |
+| [p2c-01-before-after.png](screenshots/p2c-01-before-after.png) | Messages: Q3 BEFORE and Q1 AFTER (Bitmap Index Scan on idx_event_asset_time) |
+| [p2d-01-before-after.png](screenshots/p2d-01-before-after.png) | Messages: Q2 and Q3 AFTER (Index Scan, partial index idx_event_failed_login) |
