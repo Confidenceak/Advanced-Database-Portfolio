@@ -1,0 +1,707 @@
+technique_id,name,is_subtechnique,parent_technique_id
+T1001,Data Obfuscation,false,
+T1003,OS Credential Dumping,false,
+T1005,Data from Local System,false,
+T1006,Direct Volume Access,false,
+T1007,System Service Discovery,false,
+T1008,Fallback Channels,false,
+T1010,Application Window Discovery,false,
+T1011,Exfiltration Over Other Network Medium,false,
+T1012,Query Registry,false,
+T1014,Rootkit,false,
+T1016,System Network Configuration Discovery,false,
+T1018,Remote System Discovery,false,
+T1020,Automated Exfiltration,false,
+T1021,Remote Services,false,
+T1025,Data from Removable Media,false,
+T1027,Obfuscated Files or Information,false,
+T1029,Scheduled Transfer,false,
+T1030,Data Transfer Size Limits,false,
+T1033,System Owner/User Discovery,false,
+T1036,Masquerading,false,
+T1037,Boot or Logon Initialization Scripts,false,
+T1039,Data from Network Shared Drive,false,
+T1040,Network Sniffing,false,
+T1041,Exfiltration Over C2 Channel,false,
+T1046,Network Service Discovery,false,
+T1047,Windows Management Instrumentation,false,
+T1048,Exfiltration Over Alternative Protocol,false,
+T1049,System Network Connections Discovery,false,
+T1052,Exfiltration Over Physical Medium,false,
+T1053,Scheduled Task/Job,false,
+T1055,Process Injection,false,
+T1056,Input Capture,false,
+T1057,Process Discovery,false,
+T1059,Command and Scripting Interpreter,false,
+T1068,Exploitation for Privilege Escalation,false,
+T1069,Permission Groups Discovery,false,
+T1070,Indicator Removal,false,
+T1071,Application Layer Protocol,false,
+T1072,Software Deployment Tools,false,
+T1074,Data Staged,false,
+T1078,Valid Accounts,false,
+T1080,Taint Shared Content,false,
+T1082,System Information Discovery,false,
+T1083,File and Directory Discovery,false,
+T1087,Account Discovery,false,
+T1090,Proxy,false,
+T1091,Replication Through Removable Media,false,
+T1092,Communication Through Removable Media,false,
+T1095,Non-Application Layer Protocol,false,
+T1098,Account Manipulation,false,
+T1102,Web Service,false,
+T1104,Multi-Stage Channels,false,
+T1105,Ingress Tool Transfer,false,
+T1106,Native API,false,
+T1110,Brute Force,false,
+T1111,Multi-Factor Authentication Interception,false,
+T1112,Modify Registry,false,
+T1113,Screen Capture,false,
+T1114,Email Collection,false,
+T1115,Clipboard Data,false,
+T1119,Automated Collection,false,
+T1120,Peripheral Device Discovery,false,
+T1123,Audio Capture,false,
+T1124,System Time Discovery,false,
+T1125,Video Capture,false,
+T1127,Trusted Developer Utilities Proxy Execution,false,
+T1129,Shared Modules,false,
+T1132,Data Encoding,false,
+T1133,External Remote Services,false,
+T1134,Access Token Manipulation,false,
+T1135,Network Share Discovery,false,
+T1136,Create Account,false,
+T1137,Office Application Startup,false,
+T1140,Deobfuscate/Decode Files or Information,false,
+T1176,Software Extensions,false,
+T1185,Browser Session Hijacking,false,
+T1187,Forced Authentication,false,
+T1189,Drive-by Compromise,false,
+T1190,Exploit Public-Facing Application,false,
+T1195,Supply Chain Compromise,false,
+T1197,BITS Jobs,false,
+T1199,Trusted Relationship,false,
+T1200,Hardware Additions,false,
+T1201,Password Policy Discovery,false,
+T1202,Indirect Command Execution,false,
+T1203,Exploitation for Client Execution,false,
+T1204,User Execution,false,
+T1205,Traffic Signaling,false,
+T1207,Rogue Domain Controller,false,
+T1210,Exploitation of Remote Services,false,
+T1211,Exploitation for Stealth,false,
+T1212,Exploitation for Credential Access,false,
+T1213,Data from Information Repositories,false,
+T1216,System Script Proxy Execution,false,
+T1217,Browser Information Discovery,false,
+T1218,System Binary Proxy Execution,false,
+T1219,Remote Access Tools,false,
+T1220,XSL Script Processing,false,
+T1221,Template Injection,false,
+T1222,File and Directory Permissions Modification,false,
+T1480,Execution Guardrails,false,
+T1482,Domain Trust Discovery,false,
+T1484,Domain or Tenant Policy Modification,false,
+T1485,Data Destruction,false,
+T1486,Data Encrypted for Impact,false,
+T1489,Service Stop,false,
+T1490,Inhibit System Recovery,false,
+T1491,Defacement,false,
+T1495,Firmware Corruption,false,
+T1496,Resource Hijacking,false,
+T1497,Virtualization/Sandbox Evasion,false,
+T1498,Network Denial of Service,false,
+T1499,Endpoint Denial of Service,false,
+T1505,Server Software Component,false,
+T1518,Software Discovery,false,
+T1525,Implant Internal Image,false,
+T1526,Cloud Service Discovery,false,
+T1528,Steal Application Access Token,false,
+T1529,System Shutdown/Reboot,false,
+T1530,Data from Cloud Storage,false,
+T1531,Account Access Removal,false,
+T1534,Internal Spearphishing,false,
+T1535,Unused/Unsupported Cloud Regions,false,
+T1537,Transfer Data to Cloud Account,false,
+T1538,Cloud Service Dashboard,false,
+T1539,Steal Web Session Cookie,false,
+T1542,Pre-OS Boot,false,
+T1543,Create or Modify System Process,false,
+T1546,Event Triggered Execution,false,
+T1547,Boot or Logon Autostart Execution,false,
+T1548,Abuse Elevation Control Mechanism,false,
+T1550,Use Alternate Authentication Material,false,
+T1552,Unsecured Credentials,false,
+T1553,Subvert Trust Controls,false,
+T1554,Compromise Host Software Binary,false,
+T1555,Credentials from Password Stores,false,
+T1556,Modify Authentication Process,false,
+T1557,Adversary-in-the-Middle,false,
+T1558,Steal or Forge Kerberos Tickets,false,
+T1559,Inter-Process Communication,false,
+T1560,Archive Collected Data,false,
+T1561,Disk Wipe,false,
+T1563,Remote Service Session Hijacking,false,
+T1564,Hide Artifacts,false,
+T1565,Data Manipulation,false,
+T1566,Phishing,false,
+T1567,Exfiltration Over Web Service,false,
+T1568,Dynamic Resolution,false,
+T1569,System Services,false,
+T1570,Lateral Tool Transfer,false,
+T1571,Non-Standard Port,false,
+T1572,Protocol Tunneling,false,
+T1573,Encrypted Channel,false,
+T1574,Hijack Execution Flow,false,
+T1578,Modify Cloud Compute Infrastructure,false,
+T1580,Cloud Infrastructure Discovery,false,
+T1583,Acquire Infrastructure,false,
+T1584,Compromise Infrastructure,false,
+T1585,Establish Accounts,false,
+T1586,Compromise Accounts,false,
+T1587,Develop Capabilities,false,
+T1588,Obtain Capabilities,false,
+T1589,Gather Victim Identity Information,false,
+T1590,Gather Victim Network Information,false,
+T1591,Gather Victim Org Information,false,
+T1592,Gather Victim Host Information,false,
+T1593,Search Open Websites/Domains,false,
+T1594,Search Victim-Owned Websites,false,
+T1595,Active Scanning,false,
+T1596,Search Open Technical Databases,false,
+T1597,Search Closed Sources,false,
+T1598,Phishing for Information,false,
+T1599,Network Boundary Bridging,false,
+T1600,Weaken Encryption,false,
+T1601,Modify System Image,false,
+T1602,Data from Configuration Repository,false,
+T1606,Forge Web Credentials,false,
+T1608,Stage Capabilities,false,
+T1609,Container Administration Command,false,
+T1610,Deploy Container,false,
+T1611,Escape to Host,false,
+T1612,Build Image on Host,false,
+T1613,Container and Resource Discovery,false,
+T1614,System Location Discovery,false,
+T1615,Group Policy Discovery,false,
+T1619,Cloud Storage Object Discovery,false,
+T1620,Reflective Code Loading,false,
+T1621,Multi-Factor Authentication Request Generation,false,
+T1622,Debugger Evasion,false,
+T1647,Plist File Modification,false,
+T1648,Serverless Execution,false,
+T1649,Steal or Forge Authentication Certificates,false,
+T1650,Acquire Access,false,
+T1651,Cloud Administration Command,false,
+T1652,Device Driver Discovery,false,
+T1653,Power Settings,false,
+T1654,Log Enumeration,false,
+T1657,Financial Theft,false,
+T1659,Content Injection,false,
+T1665,Hide Infrastructure,false,
+T1666,Modify Cloud Resource Hierarchy,false,
+T1667,Email Bombing,false,
+T1668,Exclusive Control,false,
+T1669,Wi-Fi Networks,false,
+T1671,Cloud Application Integration,false,
+T1673,Virtual Machine Discovery,false,
+T1674,Input Injection,false,
+T1675,ESXi Administration Command,false,
+T1677,Poisoned Pipeline Execution,false,
+T1678,Delay Execution,false,
+T1679,Selective Exclusion,false,
+T1680,Local Storage Discovery,false,
+T1681,Search Threat Vendor Data,false,
+T1682,Query Public AI Services,false,
+T1683,Generate Content,false,
+T1684,Social Engineering,false,
+T1685,Disable or Modify Tools,false,
+T1686,Disable or Modify System Firewall,false,
+T1687,Exploitation for Defense Impairment,false,
+T1688,Safe Mode Boot,false,
+T1689,Downgrade Attack,false,
+T1690,Prevent Command History Logging,false,
+T1696,Anti-Automation Evasion,false,
+T1697,Steal Application Specific Passwords,false,
+T1698,Indirect Prompt Injection,false,
+T1699,Direct Prompt Injection,false,
+T1700,AI-Enabled Exfiltration,false,
+T1001.001,Junk Data,true,T1001
+T1001.002,Steganography,true,T1001
+T1001.003,Protocol or Service Impersonation,true,T1001
+T1003.001,LSASS Memory,true,T1003
+T1003.002,Security Account Manager,true,T1003
+T1003.003,NTDS,true,T1003
+T1003.004,LSA Secrets,true,T1003
+T1003.005,Cached Domain Credentials,true,T1003
+T1003.006,DCSync,true,T1003
+T1003.007,Proc Filesystem,true,T1003
+T1003.008,/etc/passwd and /etc/shadow,true,T1003
+T1011.001,Exfiltration Over Bluetooth,true,T1011
+T1016.001,Internet Connection Discovery,true,T1016
+T1016.002,Wi-Fi Discovery,true,T1016
+T1020.001,Traffic Duplication,true,T1020
+T1021.001,Remote Desktop Protocol,true,T1021
+T1021.002,SMB/Windows Admin Shares,true,T1021
+T1021.003,Distributed Component Object Model,true,T1021
+T1021.004,SSH,true,T1021
+T1021.005,VNC,true,T1021
+T1021.006,Windows Remote Management,true,T1021
+T1021.007,Cloud Services,true,T1021
+T1021.008,Direct Cloud VM Connections,true,T1021
+T1027.001,Binary Padding,true,T1027
+T1027.002,Software Packing,true,T1027
+T1027.003,Steganography,true,T1027
+T1027.004,Compile After Delivery,true,T1027
+T1027.005,Indicator Removal from Tools,true,T1027
+T1027.006,HTML Smuggling,true,T1027
+T1027.007,Dynamic API Resolution,true,T1027
+T1027.008,Stripped Payloads,true,T1027
+T1027.009,Embedded Payloads,true,T1027
+T1027.010,Command Obfuscation,true,T1027
+T1027.011,Fileless Storage,true,T1027
+T1027.012,LNK Icon Smuggling,true,T1027
+T1027.013,Encrypted/Encoded File,true,T1027
+T1027.014,Polymorphic Code,true,T1027
+T1027.015,Compression,true,T1027
+T1027.016,Junk Code Insertion,true,T1027
+T1027.017,SVG Smuggling,true,T1027
+T1027.018,Invisible Unicode,true,T1027
+T1036.001,Invalid Code Signature,true,T1036
+T1036.002,Right-to-Left Override,true,T1036
+T1036.003,Rename Legitimate Utilities,true,T1036
+T1036.004,Masquerade Task or Service,true,T1036
+T1036.005,Match Legitimate Resource Name or Location,true,T1036
+T1036.006,Space after Filename,true,T1036
+T1036.007,Double File Extension,true,T1036
+T1036.008,Masquerade File Type,true,T1036
+T1036.009,Break Process Trees,true,T1036
+T1036.010,Masquerade Account Name,true,T1036
+T1036.011,Overwrite Process Arguments,true,T1036
+T1036.012,Browser Fingerprint,true,T1036
+T1037.001,Logon Script (Windows),true,T1037
+T1037.002,Login Hook,true,T1037
+T1037.003,Network Logon Script,true,T1037
+T1037.004,RC Scripts,true,T1037
+T1037.005,Startup Items,true,T1037
+T1048.001,Exfiltration Over Symmetric Encrypted Non-C2 Protocol,true,T1048
+T1048.002,Exfiltration Over Asymmetric Encrypted Non-C2 Protocol,true,T1048
+T1048.003,Exfiltration Over Unencrypted Non-C2 Protocol,true,T1048
+T1052.001,Exfiltration over USB,true,T1052
+T1053.002,At,true,T1053
+T1053.003,Cron,true,T1053
+T1053.005,Scheduled Task,true,T1053
+T1053.006,Systemd Timers,true,T1053
+T1053.007,Container Orchestration Job,true,T1053
+T1055.001,Dynamic-link Library Injection,true,T1055
+T1055.002,Portable Executable Injection,true,T1055
+T1055.003,Thread Execution Hijacking,true,T1055
+T1055.004,Asynchronous Procedure Call,true,T1055
+T1055.005,Thread Local Storage,true,T1055
+T1055.008,Ptrace System Calls,true,T1055
+T1055.009,Proc Memory,true,T1055
+T1055.011,Extra Window Memory Injection,true,T1055
+T1055.012,Process Hollowing,true,T1055
+T1055.013,Process Doppelgänging,true,T1055
+T1055.014,VDSO Hijacking,true,T1055
+T1055.015,ListPlanting,true,T1055
+T1056.001,Keylogging,true,T1056
+T1056.002,GUI Input Capture,true,T1056
+T1056.003,Web Portal Capture,true,T1056
+T1056.004,Credential API Hooking,true,T1056
+T1059.001,PowerShell,true,T1059
+T1059.002,AppleScript,true,T1059
+T1059.003,Windows Command Shell,true,T1059
+T1059.004,Unix Shell,true,T1059
+T1059.005,Visual Basic,true,T1059
+T1059.006,Python,true,T1059
+T1059.007,JavaScript,true,T1059
+T1059.008,Network Device CLI,true,T1059
+T1059.009,Cloud API,true,T1059
+T1059.010,AutoHotKey & AutoIT,true,T1059
+T1059.011,Lua,true,T1059
+T1059.012,Hypervisor CLI,true,T1059
+T1059.013,Container CLI/API,true,T1059
+T1069.001,Local Groups,true,T1069
+T1069.002,Domain Groups,true,T1069
+T1069.003,Cloud Groups,true,T1069
+T1070.003,Clear Command History,true,T1070
+T1070.004,File Deletion,true,T1070
+T1070.005,Network Share Connection Removal,true,T1070
+T1070.006,Timestomp,true,T1070
+T1070.007,Clear Network Connection History and Configurations,true,T1070
+T1070.008,Clear Mailbox Data,true,T1070
+T1070.009,Clear Persistence,true,T1070
+T1070.010,Relocate Malware,true,T1070
+T1071.001,Web Protocols,true,T1071
+T1071.002,File Transfer Protocols,true,T1071
+T1071.003,Mail Protocols,true,T1071
+T1071.004,DNS,true,T1071
+T1071.005,Publish/Subscribe Protocols,true,T1071
+T1074.001,Local Data Staging,true,T1074
+T1074.002,Remote Data Staging,true,T1074
+T1078.001,Default Accounts,true,T1078
+T1078.002,Domain Accounts,true,T1078
+T1078.003,Local Accounts,true,T1078
+T1078.004,Cloud Accounts,true,T1078
+T1087.001,Local Account,true,T1087
+T1087.002,Domain Account,true,T1087
+T1087.003,Email Account,true,T1087
+T1087.004,Cloud Account,true,T1087
+T1090.001,Internal Proxy,true,T1090
+T1090.002,External Proxy,true,T1090
+T1090.003,Multi-hop Proxy,true,T1090
+T1090.004,Domain Fronting,true,T1090
+T1098.001,Additional Cloud Credentials,true,T1098
+T1098.002,Additional Email Delegate Permissions,true,T1098
+T1098.003,Additional Cloud Roles,true,T1098
+T1098.004,SSH Authorized Keys,true,T1098
+T1098.005,Device Registration,true,T1098
+T1098.006,Additional Container Cluster Roles,true,T1098
+T1098.007,Additional Local or Domain Groups,true,T1098
+T1102.001,Dead Drop Resolver,true,T1102
+T1102.002,Bidirectional Communication,true,T1102
+T1102.003,One-Way Communication,true,T1102
+T1110.001,Password Guessing,true,T1110
+T1110.002,Password Cracking,true,T1110
+T1110.003,Password Spraying,true,T1110
+T1110.004,Credential Stuffing,true,T1110
+T1114.001,Local Email Collection,true,T1114
+T1114.002,Remote Email Collection,true,T1114
+T1114.003,Email Forwarding Rule,true,T1114
+T1127.001,MSBuild,true,T1127
+T1127.002,ClickOnce,true,T1127
+T1127.003,JamPlus,true,T1127
+T1132.001,Standard Encoding,true,T1132
+T1132.002,Non-Standard Encoding,true,T1132
+T1134.001,Token Impersonation/Theft,true,T1134
+T1134.002,Create Process with Token,true,T1134
+T1134.003,Make and Impersonate Token,true,T1134
+T1134.004,Parent PID Spoofing,true,T1134
+T1134.005,SID-History Injection,true,T1134
+T1136.001,Local Account,true,T1136
+T1136.002,Domain Account,true,T1136
+T1136.003,Cloud Account,true,T1136
+T1137.001,Office Template Macros,true,T1137
+T1137.002,Office Test,true,T1137
+T1137.003,Outlook Forms,true,T1137
+T1137.004,Outlook Home Page,true,T1137
+T1137.005,Outlook Rules,true,T1137
+T1137.006,Add-ins,true,T1137
+T1176.001,Browser Extensions,true,T1176
+T1176.002,IDE Extensions,true,T1176
+T1195.001,Compromise Software Dependencies and Development Tools,true,T1195
+T1195.002,Compromise Software Supply Chain,true,T1195
+T1195.003,Compromise Hardware Supply Chain,true,T1195
+T1204.001,Malicious Link,true,T1204
+T1204.002,Malicious File,true,T1204
+T1204.003,Malicious Image,true,T1204
+T1204.004,Malicious Copy and Paste,true,T1204
+T1204.005,Malicious Library,true,T1204
+T1205.001,Port Knocking,true,T1205
+T1205.002,Socket Filters,true,T1205
+T1213.001,Confluence,true,T1213
+T1213.002,Sharepoint,true,T1213
+T1213.003,Code Repositories,true,T1213
+T1213.004,Customer Relationship Management Software,true,T1213
+T1213.005,Messaging Applications,true,T1213
+T1213.006,Databases,true,T1213
+T1216.001,PubPrn,true,T1216
+T1216.002,SyncAppvPublishingServer,true,T1216
+T1218.001,Compiled HTML File,true,T1218
+T1218.002,Control Panel,true,T1218
+T1218.003,CMSTP,true,T1218
+T1218.004,InstallUtil,true,T1218
+T1218.005,Mshta,true,T1218
+T1218.007,Msiexec,true,T1218
+T1218.008,Odbcconf,true,T1218
+T1218.009,Regsvcs/Regasm,true,T1218
+T1218.010,Regsvr32,true,T1218
+T1218.011,Rundll32,true,T1218
+T1218.012,Verclsid,true,T1218
+T1218.013,Mavinject,true,T1218
+T1218.014,MMC,true,T1218
+T1218.015,Electron Applications,true,T1218
+T1219.001,IDE Tunneling,true,T1219
+T1219.002,Remote Desktop Software,true,T1219
+T1219.003,Remote Access Hardware,true,T1219
+T1222.001,Windows Permissions,true,T1222
+T1222.002,Linux and Mac Permissions,true,T1222
+T1480.001,Environmental Keying,true,T1480
+T1480.002,Mutual Exclusion,true,T1480
+T1484.001,Group Policy Modification,true,T1484
+T1484.002,Trust Modification,true,T1484
+T1485.001,Lifecycle-Triggered Deletion,true,T1485
+T1491.001,Internal Defacement,true,T1491
+T1491.002,External Defacement,true,T1491
+T1496.001,Compute Hijacking,true,T1496
+T1496.002,Bandwidth Hijacking,true,T1496
+T1496.003,SMS Pumping,true,T1496
+T1496.004,Cloud Service Hijacking,true,T1496
+T1497.001,System Checks,true,T1497
+T1497.002,User Activity Based Checks,true,T1497
+T1497.003,Time Based Checks,true,T1497
+T1498.001,Direct Network Flood,true,T1498
+T1498.002,Reflection Amplification,true,T1498
+T1499.001,OS Exhaustion Flood,true,T1499
+T1499.002,Service Exhaustion Flood,true,T1499
+T1499.003,Application Exhaustion Flood,true,T1499
+T1499.004,Application or System Exploitation,true,T1499
+T1505.001,SQL Stored Procedures,true,T1505
+T1505.002,Transport Agent,true,T1505
+T1505.003,Web Shell,true,T1505
+T1505.004,IIS Components,true,T1505
+T1505.005,Terminal Services DLL,true,T1505
+T1505.006,vSphere Installation Bundles,true,T1505
+T1518.001,Security Software Discovery,true,T1518
+T1518.002,Backup Software Discovery,true,T1518
+T1542.001,System Firmware,true,T1542
+T1542.002,Component Firmware,true,T1542
+T1542.003,Bootkit,true,T1542
+T1542.004,ROMMONkit,true,T1542
+T1542.005,TFTP Boot,true,T1542
+T1543.001,Launch Agent,true,T1543
+T1543.002,Systemd Service,true,T1543
+T1543.003,Windows Service,true,T1543
+T1543.004,Launch Daemon,true,T1543
+T1543.005,Container Service,true,T1543
+T1546.001,Change Default File Association,true,T1546
+T1546.002,Screensaver,true,T1546
+T1546.003,Windows Management Instrumentation Event Subscription,true,T1546
+T1546.004,Unix Shell Configuration Modification,true,T1546
+T1546.005,Trap,true,T1546
+T1546.006,LC_LOAD_DYLIB Addition,true,T1546
+T1546.007,Netsh Helper DLL,true,T1546
+T1546.008,Accessibility Features,true,T1546
+T1546.009,AppCert DLLs,true,T1546
+T1546.010,AppInit DLLs,true,T1546
+T1546.011,Application Shimming,true,T1546
+T1546.012,Image File Execution Options Injection,true,T1546
+T1546.013,PowerShell Profile,true,T1546
+T1546.014,Emond,true,T1546
+T1546.015,Component Object Model Hijacking,true,T1546
+T1546.016,Installer Packages,true,T1546
+T1546.017,Udev Rules,true,T1546
+T1546.018,Python Startup Hooks,true,T1546
+T1547.001,Registry Run Keys / Startup Folder,true,T1547
+T1547.002,Authentication Package,true,T1547
+T1547.003,Time Providers,true,T1547
+T1547.004,Winlogon Helper DLL,true,T1547
+T1547.005,Security Support Provider,true,T1547
+T1547.006,Kernel Modules and Extensions,true,T1547
+T1547.007,Re-opened Applications,true,T1547
+T1547.008,LSASS Driver,true,T1547
+T1547.009,Shortcut Modification,true,T1547
+T1547.010,Port Monitors,true,T1547
+T1547.012,Print Processors,true,T1547
+T1547.013,XDG Autostart Entries,true,T1547
+T1547.014,Active Setup,true,T1547
+T1547.015,Login Items,true,T1547
+T1548.001,Setuid and Setgid,true,T1548
+T1548.002,Bypass User Account Control,true,T1548
+T1548.003,Sudo and Sudo Caching,true,T1548
+T1548.004,Elevated Execution with Prompt,true,T1548
+T1548.005,Temporary Elevated Cloud Access,true,T1548
+T1548.006,TCC Manipulation,true,T1548
+T1550.001,Application Access Token,true,T1550
+T1550.002,Pass the Hash,true,T1550
+T1550.003,Pass the Ticket,true,T1550
+T1550.004,Web Session Cookie,true,T1550
+T1552.001,Credentials In Files,true,T1552
+T1552.002,Credentials in Registry,true,T1552
+T1552.003,Shell History,true,T1552
+T1552.004,Private Keys,true,T1552
+T1552.005,Cloud Instance Metadata API,true,T1552
+T1552.006,Group Policy Preferences,true,T1552
+T1552.007,Container API,true,T1552
+T1552.008,Chat Messages,true,T1552
+T1553.001,Gatekeeper Bypass,true,T1553
+T1553.002,Code Signing,true,T1553
+T1553.003,SIP and Trust Provider Hijacking,true,T1553
+T1553.004,Install Root Certificate,true,T1553
+T1553.005,Mark-of-the-Web Bypass,true,T1553
+T1553.006,Code Signing Policy Modification,true,T1553
+T1555.001,Keychain,true,T1555
+T1555.002,Securityd Memory,true,T1555
+T1555.003,Credentials from Web Browsers,true,T1555
+T1555.004,Windows Credential Manager,true,T1555
+T1555.005,Password Managers,true,T1555
+T1555.006,Cloud Secrets Management Stores,true,T1555
+T1556.001,Domain Controller Authentication,true,T1556
+T1556.002,Password Filter DLL,true,T1556
+T1556.003,Pluggable Authentication Modules,true,T1556
+T1556.004,Network Device Authentication,true,T1556
+T1556.005,Reversible Encryption,true,T1556
+T1556.006,Multi-Factor Authentication,true,T1556
+T1556.007,Hybrid Identity,true,T1556
+T1556.008,Network Provider DLL,true,T1556
+T1556.009,Conditional Access Policies,true,T1556
+T1557.001,Name Resolution Poisoning and SMB Relay,true,T1557
+T1557.002,ARP Cache Poisoning,true,T1557
+T1557.003,DHCP Spoofing,true,T1557
+T1557.004,Evil Twin,true,T1557
+T1558.001,Golden Ticket,true,T1558
+T1558.002,Silver Ticket,true,T1558
+T1558.003,Kerberoasting,true,T1558
+T1558.004,AS-REP Roasting,true,T1558
+T1558.005,Ccache Files,true,T1558
+T1559.001,Component Object Model,true,T1559
+T1559.002,Dynamic Data Exchange,true,T1559
+T1559.003,XPC Services,true,T1559
+T1560.001,Archive via Utility,true,T1560
+T1560.002,Archive via Library,true,T1560
+T1560.003,Archive via Custom Method,true,T1560
+T1561.001,Disk Content Wipe,true,T1561
+T1561.002,Disk Structure Wipe,true,T1561
+T1563.001,SSH Hijacking,true,T1563
+T1563.002,RDP Hijacking,true,T1563
+T1564.001,Hidden Files and Directories,true,T1564
+T1564.002,Hidden Users,true,T1564
+T1564.003,Hidden Window,true,T1564
+T1564.004,NTFS File Attributes,true,T1564
+T1564.005,Hidden File System,true,T1564
+T1564.006,Run Virtual Instance,true,T1564
+T1564.007,VBA Stomping,true,T1564
+T1564.008,Email Hiding Rules,true,T1564
+T1564.009,Resource Forking,true,T1564
+T1564.010,Process Argument Spoofing,true,T1564
+T1564.011,Ignore Process Interrupts,true,T1564
+T1564.012,File/Path Exclusions,true,T1564
+T1564.013,Bind Mounts,true,T1564
+T1564.014,Extended Attributes,true,T1564
+T1565.001,Stored Data Manipulation,true,T1565
+T1565.002,Transmitted Data Manipulation,true,T1565
+T1565.003,Runtime Data Manipulation,true,T1565
+T1566.001,Spearphishing Attachment,true,T1566
+T1566.002,Spearphishing Link,true,T1566
+T1566.003,Spearphishing via Service,true,T1566
+T1566.004,Spearphishing Voice,true,T1566
+T1567.001,Exfiltration to Code Repository,true,T1567
+T1567.002,Exfiltration to Cloud Storage,true,T1567
+T1567.003,Exfiltration to Text Storage Sites,true,T1567
+T1567.004,Exfiltration Over Webhook,true,T1567
+T1568.001,Fast Flux DNS,true,T1568
+T1568.002,Domain Generation Algorithms,true,T1568
+T1568.003,DNS Calculation,true,T1568
+T1569.001,Launchctl,true,T1569
+T1569.002,Service Execution,true,T1569
+T1569.003,Systemctl,true,T1569
+T1573.001,Symmetric Cryptography,true,T1573
+T1573.002,Asymmetric Cryptography,true,T1573
+T1574.001,DLL,true,T1574
+T1574.004,Dylib Hijacking,true,T1574
+T1574.005,Executable Installer File Permissions Weakness,true,T1574
+T1574.006,Dynamic Linker Hijacking,true,T1574
+T1574.007,Path Interception by PATH Environment Variable,true,T1574
+T1574.008,Path Interception by Search Order Hijacking,true,T1574
+T1574.009,Path Interception by Unquoted Path,true,T1574
+T1574.010,Services File Permissions Weakness,true,T1574
+T1574.011,Services Registry Permissions Weakness,true,T1574
+T1574.012,COR_PROFILER,true,T1574
+T1574.013,KernelCallbackTable,true,T1574
+T1574.014,AppDomainManager,true,T1574
+T1578.001,Create Snapshot,true,T1578
+T1578.002,Create Cloud Instance,true,T1578
+T1578.003,Delete Cloud Instance,true,T1578
+T1578.004,Revert Cloud Instance,true,T1578
+T1578.005,Modify Cloud Compute Configurations,true,T1578
+T1583.001,Domains,true,T1583
+T1583.002,DNS Server,true,T1583
+T1583.003,Virtual Private Server,true,T1583
+T1583.004,Server,true,T1583
+T1583.005,Botnet,true,T1583
+T1583.006,Web Services,true,T1583
+T1583.007,Serverless,true,T1583
+T1583.008,Malvertising,true,T1583
+T1584.001,Domains,true,T1584
+T1584.002,DNS Server,true,T1584
+T1584.003,Virtual Private Server,true,T1584
+T1584.004,Server,true,T1584
+T1584.005,Botnet,true,T1584
+T1584.006,Web Services,true,T1584
+T1584.007,Serverless,true,T1584
+T1584.008,Network Devices,true,T1584
+T1585.001,Social Media Accounts,true,T1585
+T1585.002,Email Accounts,true,T1585
+T1585.003,Cloud Accounts,true,T1585
+T1586.001,Social Media Accounts,true,T1586
+T1586.002,Email Accounts,true,T1586
+T1586.003,Cloud Accounts,true,T1586
+T1587.001,Malware,true,T1587
+T1587.002,Code Signing Certificates,true,T1587
+T1587.003,Digital Certificates,true,T1587
+T1587.004,Exploits,true,T1587
+T1588.001,Malware,true,T1588
+T1588.002,Tool,true,T1588
+T1588.003,Code Signing Certificates,true,T1588
+T1588.004,Digital Certificates,true,T1588
+T1588.005,Exploits,true,T1588
+T1588.006,Vulnerabilities,true,T1588
+T1588.007,Artificial Intelligence,true,T1588
+T1589.001,Credentials,true,T1589
+T1589.002,Email Addresses,true,T1589
+T1589.003,Employee Names,true,T1589
+T1590.001,Domain Properties,true,T1590
+T1590.002,DNS,true,T1590
+T1590.003,Network Trust Dependencies,true,T1590
+T1590.004,Network Topology,true,T1590
+T1590.005,IP Addresses,true,T1590
+T1590.006,Network Security Appliances,true,T1590
+T1591.001,Determine Physical Locations,true,T1591
+T1591.002,Business Relationships,true,T1591
+T1591.003,Identify Business Tempo,true,T1591
+T1591.004,Identify Roles,true,T1591
+T1592.001,Hardware,true,T1592
+T1592.002,Software,true,T1592
+T1592.003,Firmware,true,T1592
+T1592.004,Client Configurations,true,T1592
+T1593.001,Social Media,true,T1593
+T1593.002,Search Engines,true,T1593
+T1593.003,Code Repositories,true,T1593
+T1595.001,Scanning IP Blocks,true,T1595
+T1595.002,Vulnerability Scanning,true,T1595
+T1595.003,Wordlist Scanning,true,T1595
+T1596.001,DNS/Passive DNS,true,T1596
+T1596.002,WHOIS,true,T1596
+T1596.003,Digital Certificates,true,T1596
+T1596.004,CDNs,true,T1596
+T1596.005,Scan Databases,true,T1596
+T1597.001,Threat Intel Vendors,true,T1597
+T1597.002,Purchase Technical Data,true,T1597
+T1598.001,Spearphishing Service,true,T1598
+T1598.002,Spearphishing Attachment,true,T1598
+T1598.003,Spearphishing Link,true,T1598
+T1598.004,Spearphishing Voice,true,T1598
+T1599.001,Network Address Translation Traversal,true,T1599
+T1600.001,Reduce Key Space,true,T1600
+T1600.002,Disable Crypto Hardware,true,T1600
+T1601.001,Patch System Image,true,T1601
+T1601.002,Downgrade System Image,true,T1601
+T1602.001,SNMP (MIB Dump),true,T1602
+T1602.002,Network Device Configuration Dump,true,T1602
+T1606.001,Web Cookies,true,T1606
+T1606.002,SAML Tokens,true,T1606
+T1608.001,Upload Malware,true,T1608
+T1608.002,Upload Tool,true,T1608
+T1608.003,Install Digital Certificate,true,T1608
+T1608.004,Drive-by Target,true,T1608
+T1608.005,Link Target,true,T1608
+T1608.006,SEO Poisoning,true,T1608
+T1608.007,AI Result Poisoning,true,T1608
+T1614.001,System Language Discovery,true,T1614
+T1683.001,Written Content,true,T1683
+T1683.002,Audio-Visual Content,true,T1683
+T1684.001,Impersonation,true,T1684
+T1684.002,Email Spoofing,true,T1684
+T1685.001,Disable or Modify Windows Event Log,true,T1685
+T1685.002,Disable or Modify Cloud Log,true,T1685
+T1685.003,Modify or Spoof Tool UI,true,T1685
+T1685.004,Disable or Modify Linux Audit System Log,true,T1685
+T1685.005,Clear Windows Event Logs,true,T1685
+T1685.006,Clear Linux or Mac System Logs,true,T1685
+T1685.007,Impair Autonomous Defenses,true,T1685
+T1686.001,Cloud Firewall,true,T1686
+T1686.002,Network Device Firewall,true,T1686
+T1686.003,Windows Host Firewall,true,T1686
+T1696.001,Automate CAPTCHA Completion,true,T1696
+T1696.002,Avoid CAPTCHA,true,T1696
