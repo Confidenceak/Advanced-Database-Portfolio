@@ -1,4 +1,5 @@
 // CyberAce Tech Security Ltd — SOC Security Alert and Incident Management System
+// Version 2 — includes REAL reference data (CISA KEV, MITRE ATT&CK)
 // Paste into https://dbdiagram.io to render the ER diagram
 
 Table client {
@@ -34,12 +35,34 @@ Table analyst {
   shift varchar(10) [not null, note: 'Day / Night']
 }
 
+Table mitre_tactic [note: 'REAL data: MITRE ATT&CK'] {
+  tactic_id varchar(10) [pk, note: 'e.g. TA0006']
+  name varchar(60) [not null, unique, note: 'e.g. Credential Access']
+  shortname varchar(60) [not null, unique]
+}
+
+Table mitre_technique [note: 'REAL data: MITRE ATT&CK'] {
+  technique_id varchar(12) [pk, note: 'e.g. T1059 or T1059.001']
+  name varchar(150) [not null]
+  is_subtechnique boolean [not null]
+  parent_technique_id varchar(12) [null, ref: > mitre_technique.technique_id, note: 'sub-technique -> parent']
+}
+
+Table technique_tactic [note: 'M:N junction'] {
+  technique_id varchar(12) [ref: > mitre_technique.technique_id]
+  tactic_id varchar(10) [ref: > mitre_tactic.tactic_id]
+
+  indexes {
+    (technique_id, tactic_id) [pk]
+  }
+}
+
 Table detection_rule {
   rule_id integer [pk, increment]
   rule_name varchar(150) [not null, unique]
-  mitre_technique varchar(20) [note: 'e.g. T1110 Brute Force']
+  technique_id varchar(12) [ref: > mitre_technique.technique_id]
   default_severity varchar(10) [not null]
-  log_source varchar(30) [not null, note: 'Firewall, IDS, Endpoint, Auth...']
+  log_source varchar(30) [not null, note: 'Firewall, IDS, Endpoint, Auth, Email']
 }
 
 Table security_event {
@@ -84,11 +107,25 @@ Table incident {
   closed_at timestamp [null]
 }
 
-Table vulnerability {
-  cve_id varchar(20) [pk, note: 'e.g. CVE-2024-3400']
+Table vulnerability [note: 'REAL data: CISA KEV catalog'] {
+  cve_id varchar(20) [pk, note: 'e.g. CVE-2021-44228']
   title varchar(200) [not null]
-  cvss_score numeric(3,1) [not null, note: '0.0 - 10.0']
-  published_date date
+  vendor_project varchar(60) [not null]
+  product varchar(200) [not null]
+  short_description text
+  required_action text
+  date_added_to_kev date [not null]
+  known_ransomware_use boolean [not null, default: false]
+  cvss_score numeric(3,1) [null, note: 'from NIST NVD; 0.0 - 10.0']
+}
+
+Table vulnerability_cwe [note: 'M:N junction — splits multi-value KEV cwes cell (1NF)'] {
+  cve_id varchar(20) [ref: > vulnerability.cve_id]
+  cwe_id varchar(15) [note: 'e.g. CWE-787']
+
+  indexes {
+    (cve_id, cwe_id) [pk]
+  }
 }
 
 Table asset_vulnerability {
