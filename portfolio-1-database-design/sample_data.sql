@@ -1,23 +1,35 @@
 -- =====================================================================
 -- MIT 8103 Advanced Database Systems — Portfolio 1
 -- Case study: CyberAce Tech Security Ltd (simulated global MSSP)
--- File:       sample_data.sql — realistic SIMULATED test data
--- Run AFTER:  schema.sql   (database "cyberace_soc")
+-- File:       sample_data.sql — SIMULATED operational data
+-- Run AFTER:  schema.sql and import_real_data.sql  (database "cyberace_soc")
 --
--- Notes on the data:
---   * All organisations, people and events are fictitious.
+-- What is real and what is simulated:
+--   REAL (loaded by import_real_data.sql, NOT by this file):
+--     * vulnerability / vulnerability_cwe  <- CISA KEV catalog
+--     * mitre_tactic / mitre_technique / technique_tactic <- MITRE ATT&CK
+--   SIMULATED (this file): clients, analysts, assets, events, alerts,
+--     incidents, tasks and the audit log. Real SOC client records are
+--     confidential (and protected by data-protection law), so no public
+--     source exists; simulation is standard practice.
 --   * External attacker IPs use the IETF documentation ranges
 --     (192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24 — RFC 5737),
 --     so no real address is implicated.
---   * CVE records are real, publicly listed vulnerabilities.
---   * Large-volume data for performance testing is added in Portfolio 2.
+--   * Large-volume REAL log data (Loghub OpenSSH) is added in Portfolio 2.
 -- =====================================================================
 
--- Empty every table and reset the ID counters so the script can be re-run
+-- Stop early if the real reference data has not been imported yet
+DO $$ BEGIN
+    IF (SELECT COUNT(*) FROM vulnerability) = 0 OR (SELECT COUNT(*) FROM mitre_technique) = 0 THEN
+        RAISE EXCEPTION 'Real data missing: run import_real_data.sql (PSQL Tool) before sample_data.sql';
+    END IF;
+END $$;
+
+-- Empty the SIMULATED tables and reset their ID counters so the script can be re-run.
+-- The REAL reference tables (vulnerability, mitre_*) are deliberately NOT emptied.
 TRUNCATE audit_log, remediation_task, asset_vulnerability, alert_event, alert,
-         incident, security_event, asset, vulnerability, detection_rule,
-         analyst, client
-RESTART IDENTITY CASCADE;
+         incident, security_event, asset, detection_rule, analyst, client
+RESTART IDENTITY;
 
 
 -- ---------------------------------------------------------------------
@@ -45,29 +57,35 @@ INSERT INTO analyst (full_name, email, tier, shift) VALUES
 
 
 -- ---------------------------------------------------------------------
--- DETECTION RULES — mapped to MITRE ATT&CK techniques
+-- DETECTION RULES — CyberAce's own rules, each mapped to a REAL MITRE technique
 -- ---------------------------------------------------------------------
-INSERT INTO detection_rule (rule_name, mitre_technique, default_severity, log_source) VALUES
-('Brute Force Login Attempts',          'T1110', 'High',     'Auth'),
-('Internal Port Scan',                  'T1046', 'Medium',   'IDS'),
-('C2 Beacon to Known Malicious IP',     'T1071', 'Critical', 'Firewall'),
-('Suspicious Command Execution',        'T1059', 'High',     'Endpoint'),
-('Impossible Travel Login',             'T1078', 'High',     'Auth'),
-('Phishing Link Clicked',               'T1566', 'Medium',   'Email'),
-('Lateral Movement via RDP',            'T1021', 'High',     'Endpoint'),
-('Ransomware File Encryption Pattern',  'T1486', 'Critical', 'Endpoint');
+INSERT INTO detection_rule (rule_name, technique_id, default_severity, log_source) VALUES
+('Brute Force Login Attempts',          'T1110',     'High',     'Auth'),      -- Brute Force
+('Internal Port Scan',                  'T1046',     'Medium',   'IDS'),       -- Network Service Discovery
+('C2 Beacon to Known Malicious IP',     'T1071',     'Critical', 'Firewall'),  -- Application Layer Protocol
+('Suspicious Command Execution',        'T1059',     'High',     'Endpoint'),  -- Command and Scripting Interpreter
+('Impossible Travel Login',             'T1078',     'High',     'Auth'),      -- Valid Accounts
+('Phishing Link Clicked',               'T1566',     'Medium',   'Email'),     -- Phishing
+('Lateral Movement via RDP',            'T1021.001', 'High',     'Endpoint'),  -- Remote Services: Remote Desktop Protocol
+('Ransomware File Encryption Pattern',  'T1486',     'Critical', 'Endpoint');  -- Data Encrypted for Impact
 
 
 -- ---------------------------------------------------------------------
--- VULNERABILITIES — real public CVEs
+-- CVSS SCORES — KEV does not include CVSS, so base scores (CVSS v3.x)
+-- are added from the NIST National Vulnerability Database (NVD)
+-- for the real CVEs that appear on client assets below.
 -- ---------------------------------------------------------------------
-INSERT INTO vulnerability (cve_id, title, cvss_score, published_date) VALUES
-('CVE-2021-44228', 'Apache Log4j2 remote code execution (Log4Shell)',           10.0, '2021-12-10'),
-('CVE-2024-3400',  'PAN-OS GlobalProtect command injection',                    10.0, '2024-04-12'),
-('CVE-2023-34362', 'MOVEit Transfer SQL injection',                              9.8, '2023-06-02'),
-('CVE-2019-0708',  'Windows Remote Desktop Services RCE (BlueKeep)',             9.8, '2019-05-16'),
-('CVE-2014-0160',  'OpenSSL TLS heartbeat information disclosure (Heartbleed)',  7.5, '2014-04-07'),
-('CVE-2023-48795', 'SSH protocol prefix truncation (Terrapin)',                  5.9, '2023-12-18');
+UPDATE vulnerability AS v
+SET    cvss_score = n.score
+FROM  (VALUES ('CVE-2021-44228', 10.0),   -- Log4Shell
+              ('CVE-2024-3400',  10.0),   -- PAN-OS GlobalProtect
+              ('CVE-2023-34362',  9.8),   -- MOVEit Transfer
+              ('CVE-2019-0708',   9.8),   -- BlueKeep
+              ('CVE-2014-0160',   7.5),   -- Heartbleed
+              ('CVE-2024-21762',  9.8),   -- FortiOS SSL-VPN out-of-bounds write
+              ('CVE-2023-20198', 10.0))   -- Cisco IOS XE Web UI
+       AS n(cve_id, score)
+WHERE  v.cve_id = n.cve_id;
 
 
 -- ---------------------------------------------------------------------
@@ -95,17 +113,17 @@ INSERT INTO asset (client_id, hostname, ip_address, asset_type, operating_system
 
 
 -- ---------------------------------------------------------------------
--- ASSET VULNERABILITIES — which CVEs were found on which assets
+-- ASSET VULNERABILITIES — which REAL KEV CVEs were found on which (simulated) assets
 -- ---------------------------------------------------------------------
 INSERT INTO asset_vulnerability (asset_id, cve_id, detected_at, patch_status) VALUES
 (2,  'CVE-2024-3400',  '2026-10-20 09:00', 'Patched'),
-(4,  'CVE-2023-48795', '2026-10-22 11:30', 'Unpatched'),
+(5,  'CVE-2024-21762', '2026-10-22 11:30', 'Unpatched'),
 (8,  'CVE-2023-34362', '2026-10-15 08:45', 'Unpatched'),
 (11, 'CVE-2019-0708',  '2026-10-15 10:10', 'Accepted Risk'),
 (13, 'CVE-2021-44228', '2026-11-05 15:30', 'Patched'),
 (13, 'CVE-2014-0160',  '2026-09-01 12:00', 'Patched'),
 (14, 'CVE-2021-44228', '2026-11-05 15:30', 'Unpatched'),
-(16, 'CVE-2023-48795', '2026-10-28 14:00', 'Unpatched');
+(16, 'CVE-2023-20198', '2026-10-28 14:00', 'Unpatched');
 
 
 -- ---------------------------------------------------------------------
@@ -256,17 +274,21 @@ INSERT INTO audit_log (analyst_id, action, entity_type, entity_id, logged_at) VA
 
 
 -- ---------------------------------------------------------------------
--- VERIFICATION — row count for every table
+-- VERIFICATION — row count for every table (R = real data, S = simulated)
 -- ---------------------------------------------------------------------
-SELECT 'client' AS table_name, COUNT(*) AS row_count FROM client
-UNION ALL SELECT 'analyst',             COUNT(*) FROM analyst
-UNION ALL SELECT 'detection_rule',      COUNT(*) FROM detection_rule
-UNION ALL SELECT 'vulnerability',       COUNT(*) FROM vulnerability
-UNION ALL SELECT 'asset',               COUNT(*) FROM asset
-UNION ALL SELECT 'asset_vulnerability', COUNT(*) FROM asset_vulnerability
-UNION ALL SELECT 'security_event',      COUNT(*) FROM security_event
-UNION ALL SELECT 'incident',            COUNT(*) FROM incident
-UNION ALL SELECT 'alert',               COUNT(*) FROM alert
-UNION ALL SELECT 'alert_event',         COUNT(*) FROM alert_event
-UNION ALL SELECT 'remediation_task',    COUNT(*) FROM remediation_task
-UNION ALL SELECT 'audit_log',           COUNT(*) FROM audit_log;
+SELECT 'R  mitre_tactic' AS table_name, COUNT(*) AS row_count FROM mitre_tactic
+UNION ALL SELECT 'R  mitre_technique',    COUNT(*) FROM mitre_technique
+UNION ALL SELECT 'R  technique_tactic',   COUNT(*) FROM technique_tactic
+UNION ALL SELECT 'R  vulnerability',      COUNT(*) FROM vulnerability
+UNION ALL SELECT 'R  vulnerability_cwe',  COUNT(*) FROM vulnerability_cwe
+UNION ALL SELECT 'S  client',             COUNT(*) FROM client
+UNION ALL SELECT 'S  analyst',             COUNT(*) FROM analyst
+UNION ALL SELECT 'S  detection_rule',      COUNT(*) FROM detection_rule
+UNION ALL SELECT 'S  asset',               COUNT(*) FROM asset
+UNION ALL SELECT 'S  asset_vulnerability', COUNT(*) FROM asset_vulnerability
+UNION ALL SELECT 'S  security_event',      COUNT(*) FROM security_event
+UNION ALL SELECT 'S  incident',            COUNT(*) FROM incident
+UNION ALL SELECT 'S  alert',               COUNT(*) FROM alert
+UNION ALL SELECT 'S  alert_event',         COUNT(*) FROM alert_event
+UNION ALL SELECT 'S  remediation_task',    COUNT(*) FROM remediation_task
+UNION ALL SELECT 'S  audit_log',           COUNT(*) FROM audit_log;

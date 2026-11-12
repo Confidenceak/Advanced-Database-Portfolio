@@ -1,7 +1,7 @@
 -- =====================================================================
 -- MIT 8103 Advanced Database Systems — Portfolio 1
 -- File:      constraint_tests.sql — proves the constraints enforce the business rules
--- Run AFTER: schema.sql and sample_data.sql
+-- Run AFTER: schema.sql, import_real_data.sql and sample_data.sql
 --
 -- Each test deliberately tries to break a rule. A PASS means the database
 -- REJECTED the bad data. Results appear in pgAdmin's "Messages" tab.
@@ -9,7 +9,8 @@
 
 -- TEST 1: CVSS score must be between 0.0 and 10.0  (CHECK)
 DO $$ BEGIN
-    INSERT INTO vulnerability (cve_id, title, cvss_score) VALUES ('CVE-2026-9999', 'Fake vuln', 15.0);
+    INSERT INTO vulnerability (cve_id, title, vendor_project, product, date_added_to_kev, cvss_score)
+    VALUES ('CVE-2026-99999', 'Fake vuln', 'Test', 'Test', '2026-11-11', 15.0);
     RAISE NOTICE 'TEST 1 FAILED: CVSS score 15.0 was accepted';
 EXCEPTION WHEN OTHERS THEN
     RAISE NOTICE 'TEST 1 PASSED (CVSS > 10 rejected): %', SQLERRM;
@@ -155,3 +156,61 @@ SELECT incident_id, title, status,
        (SELECT COUNT(*) FROM remediation_task t WHERE t.incident_id = i.incident_id) AS tasks
 FROM incident i
 WHERE incident_id = 3;
+
+
+-- =====================================================================
+-- TESTS 14-19: rules on the REAL reference data (MITRE ATT&CK, CISA KEV)
+-- =====================================================================
+
+-- TEST 14: a sub-technique must have a parent technique  (CHECK)
+DO $$ BEGIN
+    INSERT INTO mitre_technique (technique_id, name, is_subtechnique, parent_technique_id)
+    VALUES ('T1059.999', 'Orphan sub-technique', TRUE, NULL);
+    RAISE NOTICE 'TEST 14 FAILED: sub-technique without a parent was accepted';
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'TEST 14 PASSED (sub-technique without parent rejected): %', SQLERRM;
+END $$;
+
+-- TEST 15: technique IDs must follow the ATT&CK format Txxxx or Txxxx.xxx  (CHECK)
+DO $$ BEGIN
+    INSERT INTO mitre_technique (technique_id, name, is_subtechnique) VALUES ('X999', 'Bad ID', FALSE);
+    RAISE NOTICE 'TEST 15 FAILED: invalid technique ID was accepted';
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'TEST 15 PASSED (invalid technique ID format rejected): %', SQLERRM;
+END $$;
+
+-- TEST 16: a detection rule must map to a technique that exists  (FOREIGN KEY)
+DO $$ BEGIN
+    INSERT INTO detection_rule (rule_name, technique_id, default_severity, log_source)
+    VALUES ('Rule with fake technique', 'T9999', 'Low', 'IDS');
+    RAISE NOTICE 'TEST 16 FAILED: rule with non-existent technique was accepted';
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'TEST 16 PASSED (unknown MITRE technique rejected): %', SQLERRM;
+END $$;
+
+-- TEST 17: CWE IDs must follow the format CWE-<number>  (CHECK)
+DO $$ BEGIN
+    INSERT INTO vulnerability_cwe (cve_id, cwe_id) VALUES ('CVE-2021-44228', 'CWE-abc');
+    RAISE NOTICE 'TEST 17 FAILED: invalid CWE ID was accepted';
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'TEST 17 PASSED (invalid CWE format rejected): %', SQLERRM;
+END $$;
+
+-- TEST 18: the same CWE cannot be linked to the same CVE twice  (composite PRIMARY KEY)
+DO $$
+DECLARE existing_cve VARCHAR; existing_cwe VARCHAR;
+BEGIN
+    SELECT cve_id, cwe_id INTO existing_cve, existing_cwe FROM vulnerability_cwe LIMIT 1;
+    INSERT INTO vulnerability_cwe (cve_id, cwe_id) VALUES (existing_cve, existing_cwe);
+    RAISE NOTICE 'TEST 18 FAILED: duplicate CVE-CWE link was accepted';
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'TEST 18 PASSED (duplicate CVE-CWE link rejected): %', SQLERRM;
+END $$;
+
+-- TEST 19: a MITRE technique used by a detection rule cannot be deleted  (ON DELETE RESTRICT)
+DO $$ BEGIN
+    DELETE FROM mitre_technique WHERE technique_id = 'T1486';
+    RAISE NOTICE 'TEST 19 FAILED: technique used by a detection rule was deleted';
+EXCEPTION WHEN OTHERS THEN
+    RAISE NOTICE 'TEST 19 PASSED (delete of technique in use blocked): %', SQLERRM;
+END $$;
