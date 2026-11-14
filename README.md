@@ -53,3 +53,19 @@ PostgreSQL, pgAdmin 4, dbdiagram.io, Python, GitHub
 
 ## AI Use Declaration
 *Use of Claude ai tool to gather information, for a better grammatical structure, to verify data and proper implemetation of my idea*
+
+## References
+*Arkko, J., Cotton, M. and Vegoda, L. (2010) IPv4 Address Blocks Reserved for Documentation. RFC 5737. IETF.
+Berenson, H. et al. (1995) 'A Critique of ANSI SQL Isolation Levels', Proceedings of ACM SIGMOD 1995, pp. 1–10.
+CISA (2026) Known Exploited Vulnerabilities Catalog. Available at: https://www.cisa.gov/known-exploited-vulnerabilities-catalog (Accessed: 11 November 2026).
+Codd, E.F. (1970) 'A Relational Model of Data for Large Shared Data Banks', Communications of the ACM, 13(6), pp. 377–387.
+Elmasri, R. and Navathe, S.B. (2016) Fundamentals of Database Systems. 7th edn. Pearson.
+Gilbert, S. and Lynch, N. (2002) 'Brewer's Conjecture and the Feasibility of Consistent, Available, Partition-Tolerant Web Services', ACM SIGACT News, 33(2), pp. 51–59.
+Kleppmann, M. (2017) Designing Data-Intensive Applications. Sebastopol, CA: O'Reilly Media.
+MITRE (2026) MITRE ATT&CK® Enterprise Matrix, v20.1. Available at: https://attack.mitre.org (Accessed: 11 November 2026).
+NIST (2026) National Vulnerability Database. Available at: https://nvd.nist.gov (Accessed: 11 November 2026).
+Nigeria Data Protection Act 2023.
+PostgreSQL Global Development Group (2026) PostgreSQL 18 Documentation: Using EXPLAIN; Indexes; Transaction Isolation; JSON Types; Table Partitioning. Available at: https://www.postgresql.org/docs/18/ (Accessed: 12 November 2026).
+Sadalage, P.J. and Fowler, M. (2012) NoSQL Distilled. Upper Saddle River, NJ: Addison-Wesley.
+Strom, B.E., Applebaum, A., Miller, D.P., Nickels, K.C., Pennington, A.G. and Thomas, C.B. (2020) MITRE ATT&CK: Design and Philosophy. Revised March 2020. McLean, VA: The MITRE Corporation.
+Software and tools: PostgreSQL 18 and pgAdmin 4; dbdiagram.io (Holistics); Python 3; GitHub. MITRE ATT&CK® is a registered trademark of The MITRE Corporation.*
