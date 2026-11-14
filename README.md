@@ -1,7 +1,7 @@
 # Advanced Database Systems Portfolio
 
 **Course:** MIT 8103 Advanced Database Systems, Miva Open University
-**Student:** [Your full name] — [Matric number]
+**Student:** Ekeh Confidence Ifeoma — 2026/A/MIT/0507
 **Session:** 2026/2027, First Semester (September 2026 cohort)
 
 ## Case Study
@@ -52,4 +52,4 @@ PostgreSQL, pgAdmin 4, dbdiagram.io, Python, GitHub
 *(Portfolio 4 uses PostgreSQL JSONB as the document store, with equivalent MongoDB commands provided)*
 
 ## AI Use Declaration
-*[To complete in your own words — tool used, what it was used for, and how you reviewed, tested and verified the output.]*
+*Use of Claude ai tool to gather information, for a better grammatical structure, to verify data and proper implemetation of my idea*
